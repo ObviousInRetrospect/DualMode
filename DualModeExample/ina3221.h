@@ -22,6 +22,7 @@ SOFTWARE.*/
 
 #ifndef __INA3221_H__
 #define __INA3221_H__
+#include <stdint.h>
 
 // constants stolen from Beastdevices_INA3221.h
 // that and every other INA3221 library does a lot

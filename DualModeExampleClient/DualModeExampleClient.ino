@@ -26,9 +26,11 @@ SOFTWARE.*/
 // I2C_INA PA3/PA2 (default)
 // I2C0 C2/C3 (alt)
 
-
+#define VERBOSE_DBG
 
 #include <Wire.h>
+
+#include <CRC32.h>
 
 //outside an example this belongs in a library shared with the client
 #define EWDT2_ACC_PER_CHA 2
@@ -52,6 +54,7 @@ typedef struct __attribute((packed)){
     uint32_t bts;
     ewdt_pwr_ch_t pwr[EWDT2_PWR_CHA];
     uint8_t err;
+    uint32_t crc;
 } ewdt_regs_t;
 
 typedef union{
@@ -115,11 +118,35 @@ void rw8(uint8_t devaddr,uint16_t reg, uint8_t val){
 }
 
 
+#define RETRY_CNT 2
 //load the full register file
 void rcp_ld_all(){
-  for(uint16_t i=0; i<=sizeof(ewdt_regs_t); i+=CHUNK_SZ){
-    rrl8(0x42,i,min((unsigned int)CHUNK_SZ,sizeof(ewdt_regs_t)-i),rcp.r+i);
-  }
+  uint8_t tries=RETRY_CNT;
+  uint32_t myCrc;
+  do{
+    for(uint16_t i=0; i<=sizeof(ewdt_regs_t); i+=CHUNK_SZ){
+      rrl8(0x42,i,min((unsigned int)CHUNK_SZ,sizeof(ewdt_regs_t)-i),rcp.r+i);
+    }
+    myCrc=CRC32::calculate(rcp.r,sizeof(ewdt_regs_t)-4);
+    if(myCrc != rcp.d.crc){
+#ifdef VERBOSE_DBG
+      Serial.print("rcv_crc:");
+        Serial.printHex(rcp.d.crc);
+        Serial.print(" calc:");
+        Serial.printHexln(myCrc);
+        Serial.print("bad crc, will retry ");
+        Serial.print(tries);
+        Serial.println(" times");
+        for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
+          if(i && !(i&0xF)) Serial.println(); //newline
+          Serial.printHex(rcp.r[i]);
+        }
+        Serial.println();
+#endif
+        delay(100+((RETRY_CNT-tries)*20));
+        tries--;
+    }
+  } while(myCrc != rcp.d.crc && tries);
 }
 
 //clear a channel accumulator
@@ -144,7 +171,7 @@ void loop() {
     ll=millis();
     rcp_ld_all();
     Serial.println();
-    for(int i=0; i<sizeof(ewdt_regs_t); i++){
+    for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
       if(i && !(i&0xF)) Serial.println(); //newline
       Serial.printHex(rcp.r[i]);
     }

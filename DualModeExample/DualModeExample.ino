@@ -40,6 +40,8 @@ SOFTWARE.*/
 #include <Wire.h>
 #include <avr/sleep.h>
 
+#include <CRC32.h>
+
 #define ERR_CRYSTAL 0b00000001
 
 // outside an example this belongs in a library shared with the client
@@ -66,6 +68,7 @@ typedef struct __attribute((packed)) {
   uint32_t bts;
   ewdt_pwr_ch_t pwr[EWDT2_PWR_CHA];
   uint8_t err;
+  uint32_t crc;
 } ewdt_regs_t;
 
 typedef union {
@@ -76,6 +79,9 @@ typedef union {
 // end of inlined library
 
 ewdt_regs_u reg;
+ewdt_regs_u bak;
+volatile uint8_t to_clear;
+
 
 #define P_WD_RSTP PIN_PD3
 #define P_LED PIN_PD4
@@ -113,25 +119,57 @@ ina3221_reg_t cha_to_busv_reg[] = {INA3221_REG_CH1_BUSV, INA3221_REG_CH2_BUSV,
 
 // check for a new sample on the ina3221
 // and accumulate it if it exists
+uint32_t lastrd=0;
 void rd_ina3221() {
   uint16_t reg_me;
+  uint32_t sms=millis();
+  cli();
+  //work on a temp copy of the registers.
+  memcpy(bak.r,reg.r,sizeof(ewdt_regs_t));
+  to_clear=0; //we have whatever was in regs
+  sei();
   ina_rr(INA3221_REG_MASK_ENABLE, &reg_me);
   if (reg_me & 0x1) { // low bit = reading ready
     // read the raw registers as the nice functions use expensive floating point
     // conversions even getShuntVoltage has an unhelpful *5.
-    for (int ch = 0; ch < 3; ch++) {
+    for (uint16_t ch = 0; ch < 3; ch++) {
       int16_t sv; // shunt voltage
       ina_rr(cha_to_shuntv_reg[ch], (uint16_t *)&sv);
-      ina_rr(cha_to_busv_reg[ch], &(reg.d.pwr[ch].vbus));
+      ina_rr(cha_to_busv_reg[ch], &(bak.d.pwr[ch].vbus));
       sv = sv >> 3; // per the datasheet the low 3 bits are don't care.
-      reg.d.pwr[ch].vshunt = sv;
+      bak.d.pwr[ch].vshunt = sv;
       for (int a = 0; a < EWDT2_ACC_PER_CHA; a++) {
-        reg.d.pwr[ch].acc[a].sv_sum += sv;
-        reg.d.pwr[ch].acc[a].sv_cnt++;
+        bak.d.pwr[ch].acc[a].sv_sum += sv;
+        bak.d.pwr[ch].acc[a].sv_cnt++;
       }
     }
     ina_new = 1;
+    cli();
+    if(to_clear){
+      for(int ch=0; ch<3; ch++){
+        if(to_clear & 0b1){
+          bak.d.pwr[ch].acc[0].sv_cnt = 0;
+          bak.d.pwr[ch].acc[0].sv_sum = 0;
+        }
+        if(to_clear & 0b10){
+          bak.d.pwr[ch].acc[1].sv_cnt = 0;
+          bak.d.pwr[ch].acc[1].sv_sum = 0;
+        }
+        to_clear >>=2;
+      }
+    }
+    sei();
+    bak.d.crc=CRC32::calculate(bak.r,sizeof(ewdt_regs_t)-4);
+    cli();
+    //could also just have a read pointer that gets moved over here
+    memcpy(reg.r,bak.r,sizeof(ewdt_regs_t));
+    sei();
   }
+  //test pattern data
+  //for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
+  //  reg.r[i]=i&0xFF;
+  //}
+  //reg.d.crc=CRC32::calculate(reg.r,sizeof(ewdt_regs_t)-4);
 }
 
 // setup the watch crystal, rtc, and PIT
@@ -221,6 +259,7 @@ void receiveHandler(int numbytes) {
                 ((uint8_t *)&(reg.d.pwr[ch].acc[a].sv_cnt)) + 1) {
           reg.d.pwr[ch].acc[a].sv_cnt = 0;
           reg.d.pwr[ch].acc[a].sv_sum = 0;
+          to_clear |= (a==0?0b01:0b10)<<(2*ch);
           wrote = 1;
         }
       }
@@ -238,7 +277,7 @@ void requestHandler() {
   uint8_t bytes_read = Wire.getBytesRead();
   WirePointer = (WirePointer + (bytes_read));
   uint16_t end = WirePointer + CHUNK_SZ;
-  end = min(end, sizeof(ewdt_regs_t) - 1);
+  end = min(end, sizeof(ewdt_regs_t));
   for (uint16_t i = WirePointer; i < end; i++) {
     Wire.write(reg.r[i]);
     // "write" a bunch of data - but the master might only want one byte.
@@ -250,6 +289,7 @@ void requestHandler() {
 
 void setup() {
   memset(reg.r, 0, sizeof(ewdt_regs_t));
+  memset(bak.r, 0, sizeof(ewdt_regs_t));
   TCB2.CTRLA |= 1 << TCB_RUNSTDBY_bp;
   Wire.enableDualMode(false);
   Serial.begin(115200);
@@ -260,7 +300,7 @@ void setup() {
   pinMode(P_LED, OUTPUT);
   digitalWriteFast(P_LED, 1);
   RTC_init();
-  set_sleep_mode(SLEEP_MODE_STANDBY);
+  set_sleep_mode(SLEEP_MODE_IDLE);
   sleep_enable();
 #ifdef ENABLE_SCAN     // i2c scan
   byte error, address; // variable for error and I2C address
@@ -306,7 +346,6 @@ void loop() {
     delay(1);
   }
   while (!wake && !Wire.slaveTransactionOpen()) {
-    Serial.flush();
     sleep_cpu();
   }
   wake = 0;
@@ -316,7 +355,7 @@ void loop() {
   if (((loop_ticks - ll) >> 4) >= 5) {
     ll = loop_ticks;
     Serial.println();
-    for (int i = 0; i < sizeof(ewdt_regs_t); i++) {
+    for (uint16_t i = 0; i < sizeof(ewdt_regs_t); i++) {
       if (i && !(i & 0xF))
         Serial.println(); // newline
       Serial.printHex(reg.r[i]);
