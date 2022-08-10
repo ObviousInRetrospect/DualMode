@@ -20,7 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 
-
 // Dual Mode Example demonstrates a device that acts as
 // a bus master on PA3/PA2 controlling an INA3221
 // (such as
@@ -52,25 +51,44 @@ SOFTWARE.*/
 
 #define CHUNK_SZ 32
 // register structures definitions
+// this acts like a well-behaved i2c device should.
+// you send it an address and read from that address
 
+// to make it easier to write for however a union is used to overlay the
+// registers onto some structs and a macro is provided to calculate offsets more
+// easily
+
+// a current accumulator
 typedef struct __attribute((packed)) {
+  // the sum of all the shunt voltage readings
   int32_t sv_sum;
-  uint16_t sv_cnt;
+  // the count of readings in the sum
+  // divide by this for an average current
+  //(after applying whatever factor is needed)
+  // the default resistors on the breakout are 0.1
+  // which means each lsb is 400ua or 0.4ma
+  uint16_t sv_cnt; // writing to the count resets the accumulator
 } ewdt_cur_acc_t;
 
+// an ina3221 channel
 typedef struct __attribute((packed)) {
+  // bus voltage
   uint16_t vbus;
+  // shunt voltage
   int16_t vshunt;
+  // a pair of accumulators
   ewdt_cur_acc_t acc[EWDT2_ACC_PER_CHA];
 } ewdt_pwr_ch_t;
 
+// this devices register set
 typedef struct __attribute((packed)) {
-  uint32_t bts;
+  uint32_t bts; // build timestamp, not implimented
   ewdt_pwr_ch_t pwr[EWDT2_PWR_CHA];
   uint8_t err;
   uint32_t crc;
 } ewdt_regs_t;
 
+// a union for convenient access
 typedef union {
   ewdt_regs_t d;                  // data structure view
   uint8_t r[sizeof(ewdt_regs_t)]; // raw bytes view
@@ -81,7 +99,6 @@ typedef union {
 ewdt_regs_u reg;
 ewdt_regs_u bak;
 volatile uint8_t to_clear;
-
 
 #define P_WD_RSTP PIN_PD3
 #define P_LED PIN_PD4
@@ -119,14 +136,13 @@ ina3221_reg_t cha_to_busv_reg[] = {INA3221_REG_CH1_BUSV, INA3221_REG_CH2_BUSV,
 
 // check for a new sample on the ina3221
 // and accumulate it if it exists
-uint32_t lastrd=0;
+uint32_t lastrd = 0;
 void rd_ina3221() {
   uint16_t reg_me;
-  uint32_t sms=millis();
   cli();
-  //work on a temp copy of the registers.
-  memcpy(bak.r,reg.r,sizeof(ewdt_regs_t));
-  to_clear=0; //we have whatever was in regs
+  // work on a temp copy of the registers.
+  memcpy(bak.r, reg.r, sizeof(ewdt_regs_t));
+  to_clear = 0; // we have whatever was in regs
   sei();
   ina_rr(INA3221_REG_MASK_ENABLE, &reg_me);
   if (reg_me & 0x1) { // low bit = reading ready
@@ -145,31 +161,31 @@ void rd_ina3221() {
     }
     ina_new = 1;
     cli();
-    if(to_clear){
-      for(int ch=0; ch<3; ch++){
-        if(to_clear & 0b1){
+    if (to_clear) {
+      for (int ch = 0; ch < 3; ch++) {
+        if (to_clear & 0b1) {
           bak.d.pwr[ch].acc[0].sv_cnt = 0;
           bak.d.pwr[ch].acc[0].sv_sum = 0;
         }
-        if(to_clear & 0b10){
+        if (to_clear & 0b10) {
           bak.d.pwr[ch].acc[1].sv_cnt = 0;
           bak.d.pwr[ch].acc[1].sv_sum = 0;
         }
-        to_clear >>=2;
+        to_clear >>= 2;
       }
     }
     sei();
-    bak.d.crc=CRC32::calculate(bak.r,sizeof(ewdt_regs_t)-4);
+    bak.d.crc = CRC32::calculate(bak.r, sizeof(ewdt_regs_t) - 4);
     cli();
-    //could also just have a read pointer that gets moved over here
-    memcpy(reg.r,bak.r,sizeof(ewdt_regs_t));
+    // could also just have a read pointer that gets moved over here
+    memcpy(reg.r, bak.r, sizeof(ewdt_regs_t));
     sei();
   }
-  //test pattern data
-  //for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
-  //  reg.r[i]=i&0xFF;
-  //}
-  //reg.d.crc=CRC32::calculate(reg.r,sizeof(ewdt_regs_t)-4);
+  // test pattern data
+  // for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
+  //   reg.r[i]=i&0xFF;
+  // }
+  // reg.d.crc=CRC32::calculate(reg.r,sizeof(ewdt_regs_t)-4);
 }
 
 // setup the watch crystal, rtc, and PIT
@@ -259,7 +275,7 @@ void receiveHandler(int numbytes) {
                 ((uint8_t *)&(reg.d.pwr[ch].acc[a].sv_cnt)) + 1) {
           reg.d.pwr[ch].acc[a].sv_cnt = 0;
           reg.d.pwr[ch].acc[a].sv_sum = 0;
-          to_clear |= (a==0?0b01:0b10)<<(2*ch);
+          to_clear |= (a == 0 ? 0b01 : 0b10) << (2 * ch);
           wrote = 1;
         }
       }
