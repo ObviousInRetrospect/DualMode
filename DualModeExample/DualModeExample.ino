@@ -41,6 +41,8 @@ SOFTWARE.*/
 
 #include <CRC32.h>
 
+#define TEST_PATTERN
+
 #define ERR_CRYSTAL 0b00000001
 
 // outside an example this belongs in a library shared with the client
@@ -181,11 +183,13 @@ void rd_ina3221() {
     memcpy(reg.r, bak.r, sizeof(ewdt_regs_t));
     sei();
   }
-  // test pattern data
-  // for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
-  //   reg.r[i]=i&0xFF;
-  // }
-  // reg.d.crc=CRC32::calculate(reg.r,sizeof(ewdt_regs_t)-4);
+  #ifdef TEST_PATTERN
+   //test pattern data
+   for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
+     reg.r[i]=i&0xFF;
+   }
+   reg.d.crc=CRC32::calculate(reg.r,sizeof(ewdt_regs_t)-4);
+  #endif
 }
 
 // setup the watch crystal, rtc, and PIT
@@ -193,11 +197,11 @@ void RTC_init(void) {
   uint32_t ims = millis();
   // setup watch crystal XOSC32K
   _PROTECTED_WRITE(CLKCTRL.XOSC32KCTRLA,
-                   CLKCTRL_CSUT_64K_gc            /* 64k cycles */
+                   CLKCTRL_CSUT_1K_gc            /* 64k cycles */
                        | 1 << CLKCTRL_ENABLE_bp   /* Enable: enabled */
                        | 1 << CLKCTRL_RUNSTDBY_bp /* Run standby: enabled */
                        | 0 << CLKCTRL_SEL_bp      /* Select: disabled */
-                       | 0 << CLKCTRL_LPMODE_bp /* Low-Power Mode: disabled */);
+                       | 1 << CLKCTRL_LPMODE_bp /* Low-Power Mode: disabled */);
 
   // wait for the crystal to start
   while (0 == (CLKCTRL.MCLKSTATUS & CLKCTRL_XOSC32KS_bm)) {
@@ -363,6 +367,7 @@ void loop() {
   }
   while (!wake && !Wire.slaveTransactionOpen()) {
     sleep_cpu();
+    //delay(1);
   }
   wake = 0;
   cli();
