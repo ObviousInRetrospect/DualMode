@@ -37,7 +37,7 @@ SOFTWARE.*/
 #define EWDT2_WDT_CHA 3
 #define EWDT2_SVS_DIV_MAH (21897.810219)
 
-#define CHUNK_SZ 32
+#define CHUNK_SZ 16
 
 // register structures definitions
 // this acts like a well-behaved i2c device should.
@@ -174,7 +174,7 @@ void rcp_ld_all() {
       }
       Serial.println();
 #endif
-      delay(100 + ((RETRY_CNT - tries) * 20));
+      //delay(100 + ((RETRY_CNT - tries) * 20));
       tries--;
     }
     else{
@@ -242,7 +242,7 @@ void setup() {
 uint32_t ll = 0;
 void loop() {
   // put your main code here, to run repeatedly:
-  if (millis() - ll > 100) {
+  if (millis() - ll > 1) {
     ll = millis();
     rcp_ld_all();
     Serial.print("fail: ");
@@ -256,6 +256,7 @@ void loop() {
       Serial.printHex(rcp.r[i]);
     }
     Serial.println();
+    if(rcp.d.crc != 0x44A2C3A5){ //test pattern data, don't do math
     for (int ch = 0; ch < 3; ch++) {
       clear_accum(ch, 0);
       Serial.print("ch");
@@ -280,4 +281,6 @@ void loop() {
       Serial.println();
     }
   }
+  }
+  Serial.println();
 }

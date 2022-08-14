@@ -326,7 +326,7 @@ void setup() {
   pinMode(P_LED, OUTPUT);
   digitalWriteFast(P_LED, 1);
   RTC_init();
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  set_sleep_mode(SLEEP_MODE_STANDBY);
   sleep_enable();
 #ifdef ENABLE_SCAN     // i2c scan
   byte error, address; // variable for error and I2C address
