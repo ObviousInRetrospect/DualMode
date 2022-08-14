@@ -42,6 +42,7 @@ SOFTWARE.*/
 #include <CRC32.h>
 
 #define TEST_PATTERN
+#define ENABLE_SCAN
 
 #define ERR_CRYSTAL 0b00000001
 
@@ -140,6 +141,7 @@ ina3221_reg_t cha_to_busv_reg[] = {INA3221_REG_CH1_BUSV, INA3221_REG_CH2_BUSV,
 // and accumulate it if it exists
 uint32_t lastrd = 0;
 void rd_ina3221() {
+  #ifndef TEST_PATTERN
   uint16_t reg_me;
   cli();
   // work on a temp copy of the registers.
@@ -183,7 +185,7 @@ void rd_ina3221() {
     memcpy(reg.r, bak.r, sizeof(ewdt_regs_t));
     sei();
   }
-  #ifdef TEST_PATTERN
+  #else
    //test pattern data
    for(uint16_t i=0; i<sizeof(ewdt_regs_t); i++){
      reg.r[i]=i&0xFF;
@@ -271,6 +273,7 @@ void receiveHandler(int numbytes) {
   while (numbytes) {
     uint8_t nv = Wire.read();
     uint8_t wrote = 0;
+    #ifndef TEST_PATTERN
     for (int ch = 0; ch < 3; ch++) {
       for (int a = 0; a < EWDT2_ACC_PER_CHA; a++) {
         if (&(reg.r[WirePointer]) ==
@@ -287,6 +290,9 @@ void receiveHandler(int numbytes) {
     if (!wrote) {
       reg.r[WirePointer++] = nv;
     }
+    #else
+      WirePointer++; //ignore write
+    #endif
     if (WirePointer >= sizeof(ewdt_regs_t))
       WirePointer = 0;
     numbytes--;
@@ -320,7 +326,7 @@ void setup() {
   pinMode(P_LED, OUTPUT);
   digitalWriteFast(P_LED, 1);
   RTC_init();
-  set_sleep_mode(SLEEP_MODE_IDLE);
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   sleep_enable();
 #ifdef ENABLE_SCAN     // i2c scan
   byte error, address; // variable for error and I2C address
@@ -355,6 +361,9 @@ void setup() {
   else
     Serial.println("done\n");
 #endif
+  #ifdef TEST_PATTERN
+  rd_ina3221();
+  #endif
   Wire.begin(0x42);
   Wire.onReceive(receiveHandler);
   Wire.onRequest(requestHandler);
@@ -366,6 +375,7 @@ void loop() {
     delay(1);
   }
   while (!wake && !Wire.slaveTransactionOpen()) {
+    Serial.flush();
     sleep_cpu();
     //delay(1);
   }
@@ -405,5 +415,7 @@ void loop() {
       Serial.println();
     }
   }
+  #ifndef TEST_PATTERN
   rd_ina3221();
+  #endif
 }

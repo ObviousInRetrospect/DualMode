@@ -143,6 +143,8 @@ void rw8(uint8_t devaddr, uint16_t reg, uint8_t val) {
   Wire.endTransmission();
 }
 
+uint32_t good=0;
+uint32_t bad=0;
 #define RETRY_CNT 2
 // load the full register file
 // benefits from CRC check
@@ -156,6 +158,7 @@ void rcp_ld_all() {
     }
     myCrc = CRC32::calculate(rcp.r, sizeof(ewdt_regs_t) - 4);
     if (myCrc != rcp.d.crc) {
+      bad++;
 #ifdef VERBOSE_DBG
       Serial.print("rcv_crc:");
       Serial.printHex(rcp.d.crc);
@@ -173,6 +176,12 @@ void rcp_ld_all() {
 #endif
       delay(100 + ((RETRY_CNT - tries) * 20));
       tries--;
+    }
+    else{
+      good++;
+      #ifdef VERBOSE_DBG
+      Serial.println("CRC valid");
+      #endif
     }
   } while (myCrc != rcp.d.crc && tries);
 }
@@ -233,9 +242,13 @@ void setup() {
 uint32_t ll = 0;
 void loop() {
   // put your main code here, to run repeatedly:
-  if (millis() - ll > 5000) {
+  if (millis() - ll > 100) {
     ll = millis();
     rcp_ld_all();
+    Serial.print("fail: ");
+    Serial.print(bad);
+    Serial.print(" pass: ");
+    Serial.print(good);
     Serial.println();
     for (uint16_t i = 0; i < sizeof(ewdt_regs_t); i++) {
       if (i && !(i & 0xF))
