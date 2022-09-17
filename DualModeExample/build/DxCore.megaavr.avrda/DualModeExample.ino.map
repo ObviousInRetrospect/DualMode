@@ -1,0 +1,228 @@
+
+
+Symbols from /private/var/folders/jp/8cvzydc904n1td9j3y4ntcgm0000gn/T/arduino-sketch-A693075986D8149E02339963D9CBA8D8/DualModeExample.ino.elf:
+
+Name                  Value   Class        Type         Size     Line  Section
+
+__TEXT_REGION_ORIGIN__|00000000|   W  |            NOTYPE|        |     |*ABS*
+__heap_end          |00000000|   W  |            NOTYPE|        |     |*ABS*
+__tmp_reg__         |00000000|   a  |            NOTYPE|        |     |*ABS*
+__vector_default    |00000000|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:61
+__vectors           |00000000|   T  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:61
+__zero_reg__        |00000001|   a  |            NOTYPE|        |     |*ABS*
+__FUSE_REGION_LENGTH__|00000010|   A  |            NOTYPE|        |     |*ABS*
+__CCP__             |00000034|   a  |            NOTYPE|        |     |*ABS*
+__RAMPZ__           |0000003b|   a  |            NOTYPE|        |     |*ABS*
+__SP_L__            |0000003d|   a  |            NOTYPE|        |     |*ABS*
+__SP_H__            |0000003e|   a  |            NOTYPE|        |     |*ABS*
+__SREG__            |0000003f|   a  |            NOTYPE|        |     |*ABS*
+RTC_init()::__c     |000000e8|   t  |            OBJECT|0000001e|     |.text
+__trampolines_end   |000000e8|   T  |            NOTYPE|        |     |.text
+__trampolines_start |000000e8|   T  |            NOTYPE|        |     |.text
+RTC_init()::__c     |00000106|   t  |            OBJECT|00000023|     |.text
+RTC_init()::__c     |00000129|   t  |            OBJECT|00000020|     |.text
+RTC_init()::__c     |00000149|   t  |            OBJECT|00000017|     |.text
+RTC_init()::__c     |00000160|   t  |            OBJECT|00000016|     |.text
+RTC_init()::__c     |00000176|   t  |            OBJECT|0000000d|     |.text
+RTC_init()::__c     |00000183|   t  |            OBJECT|0000000f|     |.text
+RTC_init()::__c     |00000192|   t  |            OBJECT|00000020|     |.text
+crc32_table         |000001b2|   t  |            OBJECT|00000040|     |.text
+_usart1_pins        |000001f2|   t  |            OBJECT|00000009|     |.text
+__ctors_start       |000001fc|   T  |            NOTYPE|        |     |.text
+__ctors_end         |000001fe|   T  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:230
+__dtors_end         |000001fe|   T  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:230
+__dtors_start       |000001fe|   T  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:230
+__init              |000001fe|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:230
+__EEPROM_REGION_LENGTH__|00000200|   A  |            NOTYPE|        |     |*ABS*
+_initThreeStuff()   |0000020a|   T  |              FUNC|00000018|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/main.cpp:163
+__do_copy_data      |00000222|   T  |            NOTYPE|0000001a|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2373
+__do_clear_bss      |0000023c|   T  |            NOTYPE|00000010|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2441
+.do_clear_bss_loop  |00000244|   t  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2446
+.do_clear_bss_start |00000246|   t  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2448
+__do_global_ctors   |0000024c|   T  |            NOTYPE|00000016|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2466
+__bad_interrupt     |00000268|   T  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_1          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_10         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_11         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_12         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_13         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_14         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_15         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_17         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_18         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_19         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_2          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_20         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_21         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_22         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_23         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_24         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_25         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_26         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_27         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_28         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_29         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_3          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_34         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_35         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_36         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_37         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_38         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_39         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_40         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_41         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_43         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_44         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_45         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_46         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_47         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_48         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_49         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_5          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_50         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_51         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_52         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_53         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_54         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_55         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_56         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_57         |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_6          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_7          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_8          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+__vector_9          |00000268|   W  |            NOTYPE|        |     |.text	../../../../crt1/gcrt1.S:209
+TWI_MasterWrite.constprop.55|0000026a|   t  |              FUNC|00000098|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/twi.c:311
+TwoWire::slaveTransactionOpen() [clone .constprop.6]|00000302|   t  |              FUNC|00000018|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:615
+micros              |0000031a|   t  |              FUNC|0000007a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/wiring.c:201
+delay               |00000394|   t  |              FUNC|00000060|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/wiring.c:648
+Print::write(unsigned char const*, unsigned int)|000003f4|   t  |              FUNC|0000005a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/wiring.c:658
+__LOCK_REGION_LENGTH__|00000400|   A  |            NOTYPE|        |     |*ABS*
+__SIGNATURE_REGION_LENGTH__|00000400|   A  |            NOTYPE|        |     |*ABS*
+__USER_SIGNATURE_REGION_LENGTH__|00000400|   A  |            NOTYPE|        |     |*ABS*
+UartClass::availableForWrite()|0000044e|   t  |              FUNC|0000001e|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:37
+UartClass::read()   |0000046c|   t  |              FUNC|00000028|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:465
+UartClass::peek()   |00000494|   t  |              FUNC|0000001c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:451
+UartClass::available()|000004b0|   t  |              FUNC|00000018|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:440
+UartClass::end()    |000004c8|   t  |              FUNC|0000002e|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:432
+UartClass::begin(unsigned long, unsigned int)|000004f6|   t  |              FUNC|00000226|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:428
+UartClass::_poll_tx_data_empty()|0000071c|   t  |              FUNC|0000003a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/wiring_digital.c:242
+_poll_dre_done      |00000754|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:324
+UartClass::write(unsigned char)|00000756|   t  |              FUNC|00000098|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:331
+Print::print(__FlashStringHelper const*) [clone .constprop.43]|000007ee|   t  |              FUNC|00000034|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:665
+Print::print(char) [clone .constprop.39]|00000822|   t  |              FUNC|00000008|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:68
+UartClass::flush()  |0000082a|   t  |              FUNC|00000028|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:68
+UartClass::operator bool()|00000852|   t  |              FUNC|00000004|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:493
+TWI1_ClearPins      |00000856|   t  |              FUNC|0000001a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/twi_pins.c:344
+TWI0_ClearPins      |00000870|   t  |              FUNC|0000001a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/twi_pins.c:74
+NotifyUser_onReceive|0000088a|   t  |              FUNC|0000001c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/twi.c:772
+TWI_HandleSlaveIRQ  |000008a6|   t  |              FUNC|000000ce|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/twi.c:509
+TwoWire::flush()    |00000974|   t  |              FUNC|0000001a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/twi.c:740
+TwoWire::peek()     |0000098e|   t  |              FUNC|00000034|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:559
+TwoWire::read()     |000009c2|   t  |              FUNC|0000003e|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:546
+TwoWire::available()|00000a00|   t  |              FUNC|0000001c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:476
+TwoWire::write(unsigned char const*, unsigned int)|00000a1c|   t  |              FUNC|0000005c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:425
+TwoWire::write(unsigned char)|00000a78|   t  |              FUNC|0000003c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:394
+Print::availableForWrite()|00000ab4|   t  |              FUNC|00000006|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:375
+receiveHandler(int) |00000aba|   t  |              FUNC|0000006e|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.h:58
+requestHandler()    |00000b28|   t  |              FUNC|00000060|     |.text	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:304
+UartClass::begin(unsigned long)|00000b88|   t  |              FUNC|00000012|     |.text	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:319
+ina_wr(ina3221_reg_t, unsigned int*) [clone .constprop.49]|00000b9a|   t  |              FUNC|0000002c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.h:166
+ina_rr(ina3221_reg_t, unsigned int*) [clone .constprop.46]|00000bc6|   t  |              FUNC|000000c4|     |.text	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/ina3221.cpp:26
+Print::write(char const*) [clone .part.2] [clone .constprop.45]|00000c8a|   t  |              FUNC|00000018|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.h:49
+Print::println() [clone .constprop.44]|00000ca2|   t  |              FUNC|00000006|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:125
+Print::println(__FlashStringHelper const*) [clone .constprop.42]|00000ca8|   t  |              FUNC|00000014|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:113
+Print::printNumber(unsigned long, unsigned char) [clone .constprop.40]|00000cbc|   t  |              FUNC|00000078|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:118
+Print::print(long, int) [clone .constprop.37]|00000d34|   t  |              FUNC|00000054|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:86
+Print::println(char const*) [clone .constprop.23]|00000d88|   t  |              FUNC|00000014|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:137
+Print::print(char const*) [clone .constprop.22]|00000d9c|   t  |              FUNC|00000002|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:142
+__vector_30         |00000d9e|   T  |              FUNC|00000050|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/wiring.c:127
+__vector_32         |00000dee|   T  |              FUNC|0000000a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART1.cpp:66
+__vector_31         |00000df8|   T  |              FUNC|0000000a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART1.cpp:45
+__vector_33         |00000e02|   T  |              FUNC|00000006|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART1.cpp:17
+_do_dre()           |00000e08|   T  |              FUNC|0000005c|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:160
+_do_dre             |00000e08|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART1.cpp:26
+_poll_dre           |00000e18|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:245
+_done_dre_irq       |00000e46|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:245
+_do_rxc()           |00000e64|   T  |              FUNC|00000048|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:76
+_do_rxc             |00000e64|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:245
+_end_rxc            |00000e98|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:127
+_do_txc()           |00000eac|   T  |              FUNC|00000026|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:45
+_do_txc             |00000eac|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:127
+_txc_flush_rx       |00000eb6|   t  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART.cpp:68
+__vector_42         |00000ed2|   T  |              FUNC|00000052|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:766
+__vector_16         |00000f24|   T  |              FUNC|00000052|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:757
+__vector_4          |00000f76|   T  |              FUNC|00000054|     |.text	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:259
+global constructors keyed to 65535_0_DualModeExample.ino.cpp.o.3523|00000fca|   t  |              FUNC|00000076|     |.text	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:264
+main                |00001040|   T  |              FUNC|00000812|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/main.cpp:49
+__subsf3            |00001852|   T  |              FUNC|0000000a|     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:287
+__addsf3            |00001854|   T  |            NOTYPE|        |     |.text	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/api/Print.cpp:288
+__addsf3x           |00001876|   T  |              FUNC|000000cc|     |.text
+__cmpsf2            |0000191c|   T  |              FUNC|00000008|     |.text
+__eqsf2             |0000191c|   T  |            NOTYPE|        |     |.text
+__lesf2             |0000191c|   T  |            NOTYPE|        |     |.text
+__ltsf2             |0000191c|   T  |            NOTYPE|        |     |.text
+__nesf2             |0000191c|   T  |            NOTYPE|        |     |.text
+__divsf3            |00001924|   T  |              FUNC|00000004|     |.text
+__divsf3x           |0000193e|   T  |              FUNC|000000dc|     |.text
+__divsf3_pse        |00001942|   T  |            NOTYPE|        |     |.text
+__fixunssfsi        |000019f4|   T  |              FUNC|00000058|     |.text
+__floatunsisf       |00001a4c|   T  |              FUNC|0000007a|     |.text
+__floatsisf         |00001a50|   T  |            NOTYPE|        |     |.text
+__fp_cmp            |00001ac6|   T  |              FUNC|00000048|     |.text
+__fp_inf            |00001b0e|   T  |              FUNC|0000000c|     |.text
+__fp_nan            |00001b1a|   T  |              FUNC|00000006|     |.text
+__fp_pscA           |00001b20|   T  |              FUNC|0000000e|     |.text
+__fp_pscB           |00001b2e|   T  |              FUNC|0000000e|     |.text
+__fp_round          |00001b3c|   T  |              FUNC|00000022|     |.text
+__fp_split3         |00001b5e|   T  |              FUNC|00000044|     |.text
+__fp_splitA         |00001b6e|   T  |            NOTYPE|        |     |.text
+__fp_zero           |00001ba2|   T  |              FUNC|0000000e|     |.text
+__fp_szero          |00001ba4|   T  |            NOTYPE|        |     |.text
+__gesf2             |00001bb0|   T  |              FUNC|00000008|     |.text
+__gtsf2             |00001bb0|   T  |            NOTYPE|        |     |.text
+__mulsf3            |00001bb8|   T  |              FUNC|00000004|     |.text
+__mulsf3x           |00001bd0|   T  |              FUNC|000000d2|     |.text
+__mulsf3_pse        |00001bd4|   T  |            NOTYPE|        |     |.text
+__unordsf2          |00001c7e|   T  |              FUNC|00000008|     |.text
+__udivmodsi4        |00001c86|   T  |            NOTYPE|00000044|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1638
+__udivmodsi4_loop   |00001c92|   t  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1646
+__udivmodsi4_ep     |00001cac|   t  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1660
+__muluhisi3         |00001cca|   T  |            NOTYPE|00000014|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:626
+__tablejump2__      |00001cde|   T  |            NOTYPE|00000012|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2296
+__umulhisi3         |00001cf0|   T  |            NOTYPE|0000001e|     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:564
+_exit               |00001d0e|   T  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+exit                |00001d0e|   W  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+__stop_program      |00001d10|   t  |            NOTYPE|        |     |.text	/home/admin/build/toolchain-avr-special/gcc-build/avr/avrxmega4/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+__data_load_start   |00001d12|   A  |            NOTYPE|        |     |*ABS*
+_etext              |00001d12|   T  |            NOTYPE|        |     |.text
+__data_load_end     |00001e54|   A  |            NOTYPE|        |     |*ABS*
+__DATA_REGION_LENGTH__|00004000|   A  |            NOTYPE|        |     |*ABS*
+__stack             |00007fff|   W  |            NOTYPE|        |     |*ABS*
+__RODATA_PM_OFFSET__|00008000|   A  |            NOTYPE|        |     |*ABS*
+__TEXT_REGION_LENGTH__|00020000|   A  |            NOTYPE|        |     |*ABS*
+__DATA_REGION_ORIGIN__|00804000|   A  |            NOTYPE|        |     |*ABS*
+__data_start        |00804000|   D  |            NOTYPE|        |     |.data
+digital_pin_to_bit_mask|00804000|   d  |            OBJECT|00000029|     |.data	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/variants/48pin-standard/pins_arduino.h:433
+digital_pin_to_port |00804029|   d  |            OBJECT|00000029|     |.data	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/variants/48pin-standard/pins_arduino.h:334
+digital_pin_to_bit_position|00804052|   d  |            OBJECT|00000029|     |.data	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/variants/48pin-standard/pins_arduino.h:380
+vtable for UartClass|0080407b|   d  |            OBJECT|0000001a|     |.data
+vtable for TwoWire  |00804095|   d  |            OBJECT|00000012|     |.data
+__bss_start         |00804142|   B  |            NOTYPE|        |     |.bss
+__data_end          |00804142|   D  |            NOTYPE|        |     |.data
+_edata              |00804142|   D  |            NOTYPE|        |     |.data
+to_clear            |00804142|   b  |            OBJECT|00000001|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:106
+ina_new             |00804143|   b  |            OBJECT|00000001|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:134
+WirePointer         |00804144|   b  |            OBJECT|00000002|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:267
+bak                 |00804146|   b  |            OBJECT|00000039|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:105
+reg                 |0080417f|   b  |            OBJECT|00000039|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:104
+ll                  |008041b8|   b  |            OBJECT|00000004|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:378
+ticks               |008041bc|   b  |            OBJECT|00000004|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:256
+wake                |008041c0|   b  |            OBJECT|00000001|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:255
+printflag           |008041c1|   b  |            OBJECT|00000001|     |.bss	/Users/gbr4/Documents/GitHub/DualMode/DualModeExample/DualModeExample.ino:265
+timer_millis        |008041c2|   b  |            OBJECT|00000004|     |.bss	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/wiring.c:57
+Serial1             |008041c6|   b  |            OBJECT|00000097|     |.bss	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/cores/dxcore/UART1.cpp:81
+Wire1               |0080425d|   b  |            OBJECT|000001a2|     |.bss	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:783
+Wire                |008043ff|   b  |            OBJECT|000001a2|     |.bss	/Users/gbr4/Library/Arduino15/packages/DxCore/hardware/megaavr/1.4.10/libraries/Wire/src/Wire.cpp:778
+__bss_end           |008045a1|   B  |            NOTYPE|        |     |.bss
+_end                |008045a1|   N  |            NOTYPE|        |     |.comment
+__eeprom_end        |00810000|   N  |            NOTYPE|        |     |.comment

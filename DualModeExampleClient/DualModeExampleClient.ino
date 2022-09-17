@@ -250,13 +250,14 @@ void loop() {
     Serial.print(" pass: ");
     Serial.print(good);
     Serial.println();
+    if(rcp.d.crc != 0x44A2C3A5){ //test pattern data, don't do math
     for (uint16_t i = 0; i < sizeof(ewdt_regs_t); i++) {
       if (i && !(i & 0xF))
         Serial.println(); // newline
       Serial.printHex(rcp.r[i]);
     }
     Serial.println();
-    if(rcp.d.crc != 0x44A2C3A5){ //test pattern data, don't do math
+    
     for (int ch = 0; ch < 3; ch++) {
       clear_accum(ch, 0);
       Serial.print("ch");

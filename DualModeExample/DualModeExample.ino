@@ -39,7 +39,17 @@ SOFTWARE.*/
 #include <Wire.h>
 #include <avr/sleep.h>
 
+#define CHECK_OPEN
+//#define SLP_M SLEEP_MODE_PWR_DOWN
+#define SLP_M SLEEP_MODE_STANDBY
+//#define SLP_M SLEEP_MODE_IDLE
+
+
 #include <CRC32.h>
+
+#define Serial0 Serial
+#undef Serial
+#define Serial Serial1
 
 #define TEST_PATTERN
 #define ENABLE_SCAN
@@ -260,6 +270,7 @@ ISR(RTC_PIT_vect) {
       RTC_PI_bm; /* Clear interrupt flag by writing '1' (required) */
   ticks++;
 }
+volatile uint8_t printflag=0;
 
 uint16_t WirePointer = 0;
 void receiveHandler(int numbytes) {
@@ -297,6 +308,7 @@ void receiveHandler(int numbytes) {
       WirePointer = 0;
     numbytes--;
   }
+  printflag=1;
 }
 
 void requestHandler() {
@@ -311,6 +323,7 @@ void requestHandler() {
     // and won't know until it's gotten all that it wants and has generated a
     // stop condition.
   }
+  printflag=1;
 }
 
 void setup() {
@@ -318,6 +331,7 @@ void setup() {
   memset(bak.r, 0, sizeof(ewdt_regs_t));
   TCB2.CTRLA |= 1 << TCB_RUNSTDBY_bp;
   Wire.enableDualMode(false);
+  //Wire.swap(2);
   Serial.begin(115200);
   Wire.begin();
   Serial.println("boot");
@@ -326,7 +340,7 @@ void setup() {
   pinMode(P_LED, OUTPUT);
   digitalWriteFast(P_LED, 1);
   RTC_init();
-  set_sleep_mode(SLEEP_MODE_STANDBY);
+  set_sleep_mode(SLP_M);
   sleep_enable();
 #ifdef ENABLE_SCAN     // i2c scan
   byte error, address; // variable for error and I2C address
@@ -371,13 +385,50 @@ void setup() {
 
 uint32_t ll = 0;
 void loop() {
+  if(printflag){
+    Serial.print("+");
+    printflag=0;
+  }
+  #ifdef CHECK_OPEN
   while (!wake && Wire.slaveTransactionOpen()) {
     delay(1);
   }
+  #endif
+  if(!wake){
+    Serial.flush();    
+  }
+  //yes, real-world testing proves this level of paranoia is in fact necessary
+  //the body of the below loop used to just sleep_cpu(). it would fail approximately 3 times per million
+  //transactions when a transaction fired between the slaveTransactionOpen() calculated
+  //its return value
+  //and the sleep_cpu()
+  #ifdef CHECK_OPEN
   while (!wake && !Wire.slaveTransactionOpen()) {
-    Serial.flush();
-    sleep_cpu();
+    cli();
+    if(!Wire.slaveTransactionOpen()){
+      // The instruction following SEI will be executed before any pending interrupts.
+      // per http://ww1.microchip.com/downloads/en/devicedoc/atmel-0856-avr-instruction-set-manual.pdf     
+      //sei();   
+      //sleep_cpu(); 
+      //re-writing this as assembler as relying on the order of compiler generated assembly is madness
+      asm volatile( "sei\n\t"
+                    "sleep\n\t"
+                    ::);
+    }
+    else{
+      sei();
+    }
     //delay(1);
+  }
+  #else
+  while(!wake){
+     Serial.flush();
+     sleep_cpu();
+  }
+  #endif
+  if(printflag){
+    Serial.print("+");
+    printflag=0;
   }
   wake = 0;
   cli();
